@@ -49,8 +49,8 @@ endif
 
 COMPILER_CALL = $(CXX) $(CXXFLAGS) $(CPPFLAGS)
 
-CXX_SOURCES = $(wildcard $(SOURCE_DIR)/*.cpp)
-CXX_OBJECTS = $(wildcard $(SOURCE_DIR)/%.cpp, $(BUILD_DIR)/%.o, $(CXX_SOURCES))
+CXX_SOURCES = $(wildcard $(SOURCE_DIR)/*.cpp $(SOURCE_DIR)/*.cc)
+CXX_OBJECTS = $(wildcard $(SOURCE_DIR)/%.cpp $(SOURCE_DIR)/*.cc, $(BUILD_DIR)/%.o, $(CXX_SOURCES))
 
 ## TARGETS
 all: create build execute
@@ -62,7 +62,7 @@ else
 	@mkdir -p build
 endif
 
-build: create $(CXX_OBJECTS)
+build: $(CXX_OBJECTS)
 	$(COMPILER_CALL) $(CXX_OBJECTS) -o $(BUILD_DIR)/$(EXECUTABLE_NAME)
 
 execute:
